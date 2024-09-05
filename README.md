@@ -99,7 +99,7 @@ call: argparse %options% -b=homes -c=46 || call :error
 goto :sucessful_exit
 
 :error
-goto :sucessful_exit
+goto :not_sucessful_exit
 ```
 
 See more use cases in test cases or in examples.
