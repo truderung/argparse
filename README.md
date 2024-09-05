@@ -89,4 +89,11 @@ call: argparse %options% -b=homes -c=46
 ```
 results in: Error: Mandatory argument -a not given, -b=homes, -c=46
 
-See more use cases in test cases.
+e)
+To improve error handling you might want to add an jump on error using the
+returned errorlevel.
+```batch
+call: argparse %options% -b=homes -c=46 || goto :error
+```
+
+See more use cases in test cases or in examples.
