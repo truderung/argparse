@@ -1,21 +1,22 @@
 # argparse
 
-A submodule to realize parsing of arguments in batches.
+A submodule to realize parsing of mandatory and optional arguments in batches.
 
-Let argparse be in same directory as your script. Insert the call in following line to the top of your batch file, e.g.
+Let's assume that argparse is in same directory as your script. Insert the call in following line to the top (or close to the top, of course) of your batch file and argparse will do the job:
 
 ```batch
 call argparse <options> %*
 ```
 
-argparse expects at least the argument <options>, as a string of mandatory and possibly optional arguments, separated by ; (semicolon). Arguments given left of ; are mandatory and right of ; are optional. If no ; is given all arguments are interpreted as mandatory. The order of defined arguments on the left and and on the right is irrelevant.
+But first things first ...
+argparse expects at least the argument <options>, as a string of mandatory and/or optional arguments, separated by ; (semicolon). Arguments given left of ; are mandatory and right of ; are optional. If no ; is given all arguments are interpreted as mandatory. The order of defined arguments on the left of ; and on the right is irrelevant.
 
 To come back to the example from above, set your options as 1st argument of argparse.
 ```batch
 call argparse "-a: -b:;-c:5 -d: -e:point" %*
 ```
 
-The arguments need to be defined as follows:
+The arguments need to be defined in `options` as follows:
 - put option string into quotation marks
 - all arguments start with -
 - all arguments end with :
