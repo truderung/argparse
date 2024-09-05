@@ -9,6 +9,7 @@ call argparse <options> %*
 ```
 
 But first things first ...
+
 argparse expects at least the argument <options>, as a string of mandatory and/or optional arguments, separated by ; (semicolon). Arguments given left of ; are mandatory and right of ; are optional. If no ; is given all arguments are interpreted as mandatory. The order of defined arguments on the left of ; and on the right is irrelevant.
 
 To come back to the example from above, set your options as 1st argument of argparse.
