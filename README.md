@@ -65,17 +65,20 @@ is expected, as is usual.
 Suppose options is equal to "-a: -b:;-c:5 -d: -e:point".
 Valid calls can look like:
 
-a) ```batch
+a)
+```batch
 call argparse %options% -a cherry -b=homes
 ```
 results in: -a=cherry, -b=homes, -c=5, -e=point; -d does not exist in environment
 
-b) ```batch
+b)
+```batch
 call argparse %options% -a=cherry -b homes -d
 ```
 results in: -a=cherry, -b=homes, -c=5, -d=true, -e=point
 
-c) ```batch
+c)
+```batch
 call: argparse %options% -a cherry -b=homes -c=46
 ```
 results in: -a=cherry, -b=homes, -c=46, -e=point
