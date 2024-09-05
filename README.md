@@ -40,7 +40,7 @@ Flags:
 - given flags are set into environment as true; non-existent are set as false
 - they can be defined as both mandatory and optional, but it's not allowed to skip an mandatory one
 
-Implementation inspired by [this](https://stackoverflow.com/questions/3973824/windows-bat-file-optional-argument-parsing/8162578#8162578) and by [this](https://stackoverflow.com/questions/55523387/local-variable-and-return-value-of-function-in-windows-batch)
+Implementation inspired by [this](https://stackoverflow.com/questions/3973824/windows-bat-file-optional-argument-parsing/8162578#8162578) and by [this](https://stackoverflow.com/questions/55523387/local-variable-and-return-value-of-function-in-windows-batch).
 
 ## usage
 
@@ -48,7 +48,7 @@ Implementation inspired by [this](https://stackoverflow.com/questions/3973824/wi
 call argparse <options> %*
 ```
 
-The argument <options> defines the api interface. The %* forwards
+The argument `options` defines the api interface. The %* forwards
 all received arguments to argparse. After call of argparse
 forwarded keys and possible values are set as variables into the 
 environment of the caller. Be aware of already exsistent variables!
@@ -62,11 +62,10 @@ Unknown arguments will cause also an error message. The return errorlevel
 is on every occured error incremented.
 
 Note that in options a : (colon) is used as delimiter.
-But in forwarded argmuments a space or a = (equal sign)
-is expected, as is usual.
+But in forwarded argmuments space or = (equal sign) is expected, as is usual.
 
-Suppose options is equal to "-a: -b:;-c:5 -d: -e:point".
-Valid calls can look like:
+Suppose `options` is equal to "-a: -b:;-c:5 -d: -e:point".
+Valid calls might be:
 
 a)
 ```batch
@@ -94,9 +93,9 @@ results in: Error: Mandatory argument -a not given, -b=homes, -c=46
 
 e)
 To improve error handling you might want to add an jump on error using the
-returned errorlevel.
+returned errorlevel. At the label :error you can handle the exception and return with ``goto :eof`` if intended or exit completely.
 ```batch
-call: argparse %options% -b=homes -c=46 || goto :error
+call: argparse %options% -b=homes -c=46 || call :error
 ```
 
 See more use cases in test cases or in examples.
