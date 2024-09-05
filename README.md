@@ -96,6 +96,10 @@ To improve error handling you might want to add an jump on error using the
 returned errorlevel. At the label :error you can handle the exception and return with ``goto :eof`` if intended or exit completely.
 ```batch
 call: argparse %options% -b=homes -c=46 || call :error
+goto :sucessful_exit
+
+:error
+goto :sucessful_exit
 ```
 
 See more use cases in test cases or in examples.
