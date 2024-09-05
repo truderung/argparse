@@ -8,6 +8,8 @@ Let's assume that argparse is in same directory as your script. Insert the call 
 call argparse <options> %*
 ```
 
+## description
+
 But first things first ...
 
 argparse expects at least the argument `options`, as a string of mandatory and/or optional arguments, separated by ; (semicolon). Arguments given left of ; are mandatory and right of ; are optional. If no ; is given all arguments are interpreted as mandatory. The order of defined arguments on the left of ; and on the right is irrelevant.
@@ -18,30 +20,29 @@ call argparse "-a: -b:;-c:5 -d: -e:point" %*
 ```
 
 The arguments need to be defined in `options` as follows:
-- put option string into quotation marks
-- all arguments start with -
+- put the `options` string into quotation marks
+- all arguments start with - or --
 - all arguments end with :
 
 Mandatory arguments have in addition:
 - no default value
 - multiple arguments are separated by space
-e.g.: "-username:" or "-username: -password:"
+e.g.: "--username: --password:"
 
 Optional arguments have in addition:
 - a default value
 - multiple key-value pairs are separated by space
-e.g.: "-username:paulo -high: 160cm
+e.g.: "-username:paulo -high:160cm"
 
 Flags:
 - are handled same as arguments, but are given without value
+- be aware of : at the end of a flag, e.g.: "-q:"
 - given flags are set into environment as true; non-existent are set as false
-- can be defined as both mandatory and optional, but it's not allowed to skip an mandatory one
-
+- they can be defined as both mandatory and optional, but it's not allowed to skip an mandatory one
 
 Implementation inspired by [this](https://stackoverflow.com/questions/3973824/windows-bat-file-optional-argument-parsing/8162578#8162578) and by [this](https://stackoverflow.com/questions/55523387/local-variable-and-return-value-of-function-in-windows-batch)
 
-
-# usage
+## usage
 
 ```batch
 call argparse <options> %*
