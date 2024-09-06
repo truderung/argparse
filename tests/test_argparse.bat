@@ -1,7 +1,7 @@
 @echo off
 
 set spath=%~dp0
-set src=%spath%..\src\scripts
+set src=%spath%..\src
 set command=argparse.bat
 set failcounter=0
 pushd %spath%
