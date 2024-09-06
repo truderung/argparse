@@ -57,7 +57,7 @@
 :: 
 :: Note that in options a : (colon) is used as delimiter. But in forwarded
 :: argmuments space or = (equal sign) is expected, as is usual. Supply the arguments as `-key value` or as `-key=value`.
-::
+:: 
 :: Suppose `option` is set to
 :: ```
 :: set options="-a: -b:;-c:5 -d: -e:point"
@@ -84,7 +84,7 @@
 :: :error
 :: goto :not_sucessful_exit
 :: ```
-::
+:: 
 :: See more use cases in test cases.
 ::
 
@@ -110,10 +110,10 @@ for %%O in (%-mandatory_options%) do for /f "tokens=1,2 delims=:" %%A in ("%%O")
   set "first_char=!key:~0,1!"
   set "value=%%~B"
   if "!value!" neq "" (
-    echo Error: Default value '!value!' is not allowed on mandatory argument
+    echo Error: Default value '!value!' is not allowed on mandatory argument 1>&2
     set /a errlevel+=1
   ) else if not "!first_char!"=="-" (
-    echo Error: Invalid option '!key!'
+    echo Error: Invalid option '!key!' 1>&2
     set /a errlevel+=1
   )
 )
@@ -123,7 +123,7 @@ for %%O in (%-optional_options%) do for /f "tokens=1,* delims=:" %%A in ("%%O") 
   set "key=%%A"
   set "first_char=!key:~0,1!"
   if not "!first_char!"=="-" (
-    echo Error: Invalid option '!key!'
+    echo Error: Invalid option '!key!' 1>&2
     set /a errlevel+=1
   ) else (
     set "%%A=%%~B"
@@ -135,7 +135,7 @@ if not "%~1"=="" (
   :: extract first group (%~1:) from options
   set "test=!options:*%~1:=! "
   if "!test!"=="!options! " (
-    echo Error: Invalid option '%~1'
+    echo Error: Invalid option '%~1' 1>&2
     set /a errlevel+=1
   ) else (
     :: echo valued option or mandatory flag
@@ -174,7 +174,7 @@ exit /b
 :: check given mandatory arguments
 for %%O in (%-mandatory_options%) do for /f "tokens=1,2 delims=:" %%A in ("%%O") do (
   if "!%%~A!"=="" (
-    echo Error: Mandatory argument '%%A' not given
+    echo Error: Mandatory argument '%%A' not given 1>&2
     set /a errlevel+=1
   )
 )
