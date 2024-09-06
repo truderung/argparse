@@ -61,16 +61,16 @@ In case the argument options is "-a: -b:;-c:5 -d: -e:point", argparse will
 Unknown arguments will cause also an error message. The return errorlevel
 is on every occured error incremented.
 
-Note that in options a : (colon) is used as delimiter.
-But in forwarded argmuments space or = (equal sign) is expected, as is usual.
+Note that in options a : (colon) is used as delimiter. But in forwarded
+argmuments space or = (equal sign) is expected, as is usual. Supply the arguments as `-key value` or as `-key=value`.
 
 Suppose `option` is set to
 ```
 set options="-a: -b:;-c:5 -d: -e:point"
 ```
-To demonstrate the functionality argmuments are supplied here directly to argparse, but in intended use case they would come from the caller script. Supply the arguments as `-key value` or as `-key=value`. Valid calls might be:
+To demonstrate the functionality argmuments are supplied here directly to argparse, but in intended use case they would come from the caller script. Valid calls might be:
 
-a) Only mandatory arguments are specified. The optianal are preset by default, in which case `-d` was set to `false`.
+a) Only mandatory arguments are specified. The optional ones are preset by default, in this case `-d` has been set to `false`.
 ```batch
 call argparse %options% -a cherry -b=homes
 ```

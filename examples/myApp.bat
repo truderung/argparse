@@ -1,5 +1,10 @@
+:: myApp expect --name as mandatory and except --gender and --tall as optional
+:: arguments. Based on the input the output is, of course, for illustrative
+:: purposes only.
+
 @echo off
 
+:: argparse is not in same directory, so the path is defined here
 set src=%~dp0..\src
 
 call %src%\argparse "--name:;--gender:male --tall:" %* || goto :error
@@ -18,7 +23,7 @@ if "%--tall%"=="true" (
         echo  - ... and you might be good.
     )
 ) else (
-    echo  - but unfortunately the flag --tall is valued wrongly
+    echo  - but unfortunately the flag --tall is set incorrectly.
 )
 
 goto :eof

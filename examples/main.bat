@@ -1,3 +1,7 @@
+:: This is simply a script for demonstration. It executes myApp with different
+:: arguments. Available args and the functionality itself are defined in myApp.
+:: myApp uses argparse to manage the supplied arguments.
+
 @echo off
 
 (echo. ) & echo example 1: --name is not set

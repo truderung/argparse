@@ -54,25 +54,36 @@
 :: Unknown arguments will cause also an error message. The return errorlevel
 :: is on every occured error incremented.
 ::
-:: Note that in options a : (colon) is used as delimiter.
-:: But in forwarded argmuments a space or a = (equal sign)
-:: is expected, as is usual.
+:: 
+:: Note that in options a : (colon) is used as delimiter. But in forwarded
+:: argmuments space or = (equal sign) is expected, as is usual. Supply the arguments as `-key value` or as `-key=value`.
 ::
-:: Suppose options is equal "-a: -b:;-c:5 -d: -e:point".
-:: Valid calls can look like:
-:: a)
+:: Suppose `option` is set to
+:: ```
+:: set options="-a: -b:;-c:5 -d: -e:point"
+:: ```
+:: To demonstrate the functionality argmuments are supplied here directly to argparse, but in intended use case they would come from the caller script. Valid calls might be:
+:: 
+:: a) Only mandatory arguments are specified. The optional ones are preset by default, in this case `-d` has been set to `false`.
+:: ```batch
 :: call argparse %options% -a cherry -b=homes
-:: result: -a=cherry, -b=homes, -c=5, -e=point; -d does not exist in environment
-:: b)
-:: call argparse %options% -a=cherry -b homes -d
-:: result: -a=cherry, -b=homes, -c=5, -d=true, -e=point
-:: c)
-:: call: argparse %options% -a cherry -b=homes -c=46
-:: result: -a=cherry, -b=homes, -c=46, -e=point
-:: d)
+:: ```
+:: results in: -a=cherry, -b=homes, -c=5, -d=false, -e=point
+:: 
+:: b) If a mandatory argument is missing argparse will output an error and increment the errorlevel.
+:: ```batch
 :: call: argparse %options% -b=homes -c=46
-:: result: Error: Mandatory argument -a not given
-::         -b=homes, -c=46
+:: ```
+:: results in: Error: Mandatory argument -a not given, -b=homes, -c=46
+:: 
+:: c) To improve error handling you might want to add an jump on error using the returned errorlevel. At the label :error you can handle the exception and return with ``goto :eof`` if intended or exit completely.
+:: ```batch
+:: call: argparse %options% -b=homes -c=46 || call :error
+:: goto :sucessful_exit
+:: 
+:: :error
+:: goto :not_sucessful_exit
+:: ```
 ::
 :: See more use cases in test cases.
 ::
