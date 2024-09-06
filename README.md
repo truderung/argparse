@@ -64,7 +64,10 @@ is on every occured error incremented.
 Note that in options a : (colon) is used as delimiter.
 But in forwarded argmuments space or = (equal sign) is expected, as is usual.
 
-Suppose `options` is equal to "-a: -b:;-c:5 -d: -e:point".
+Suppose `option´` is set to
+```
+set options="-a: -b:;-c:5 -d: -e:point"
+```
 Valid calls might be:
 
 a)
