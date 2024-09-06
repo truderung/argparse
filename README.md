@@ -64,39 +64,25 @@ is on every occured error incremented.
 Note that in options a : (colon) is used as delimiter.
 But in forwarded argmuments space or = (equal sign) is expected, as is usual.
 
-Suppose `option´` is set to
+Suppose `option` is set to
 ```
 set options="-a: -b:;-c:5 -d: -e:point"
 ```
-Valid calls might be:
+To demonstrate the functionality argmuments are supplied here directly to argparse, but in intended use case they would come from the caller script. Supply the arguments as `-key value` or as `-key=value`. Valid calls might be:
 
-a)
+a) Only mandatory arguments are specified. The optianal are preset by default, in which case `-d` was set to `false`.
 ```batch
 call argparse %options% -a cherry -b=homes
 ```
-results in: -a=cherry, -b=homes, -c=5, -e=point; -d does not exist in environment
+results in: -a=cherry, -b=homes, -c=5, -d=false, -e=point
 
-b)
-```batch
-call argparse %options% -a=cherry -b homes -d
-```
-results in: -a=cherry, -b=homes, -c=5, -d=true, -e=point
-
-c)
-```batch
-call: argparse %options% -a cherry -b=homes -c=46
-```
-results in: -a=cherry, -b=homes, -c=46, -e=point
-
-d)
+b) If a mandatory argument is missing argparse will output an error and increment the errorlevel.
 ```batch
 call: argparse %options% -b=homes -c=46
 ```
 results in: Error: Mandatory argument -a not given, -b=homes, -c=46
 
-e)
-To improve error handling you might want to add an jump on error using the
-returned errorlevel. At the label :error you can handle the exception and return with ``goto :eof`` if intended or exit completely.
+c) To improve error handling you might want to add an jump on error using the returned errorlevel. At the label :error you can handle the exception and return with ``goto :eof`` if intended or exit completely.
 ```batch
 call: argparse %options% -b=homes -c=46 || call :error
 goto :sucessful_exit
